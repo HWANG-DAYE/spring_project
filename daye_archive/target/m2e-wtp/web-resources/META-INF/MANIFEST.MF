@@ -1,6 +1,5 @@
 Manifest-Version: 1.0
-Build-Jdk-Spec: 11
-Implementation-Title: daye_archive
-Implementation-Version: 1.0.0-BUILD-SNAPSHOT
+Built-By: green
+Build-Jdk: 11
 Created-By: Maven Integration for Eclipse
 

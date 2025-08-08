@@ -4,8 +4,5 @@
 		"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.springproject.archive.dto.BoardDto" alias="BoardDto"/>
-		<typeAlias type="com.springproject.archive.dto.Member" alias="Member"/>
-		<typeAlias type="com.springproject.archive.util.SearchCondition" alias="searchCondition"/>
 	</typeAliases>
 </configuration>

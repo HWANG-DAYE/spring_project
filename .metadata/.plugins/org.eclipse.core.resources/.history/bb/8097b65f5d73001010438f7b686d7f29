@@ -1,0 +1,40 @@
+package com.springproject.archive.controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.springproject.archive.dao.BlogDAO;
+import com.springproject.archive.dto.BlogDTO;
+
+@WebServlet("/blogInsert.do")
+public class BlogInsertServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        request.setCharacterEncoding("UTF-8");
+
+        // 이미지 업로드 처리 (multipart/form-data 처리 필요)
+        String title = request.getParameter("title");
+        String content = request.getParameter("content");
+        String thumbnailUrl = request.getParameter("image"); // 파일 업로드 처리 필요
+
+        // 예: user_id는 세션에서 가져왔다고 가정
+        int userId = (int) request.getSession().getAttribute("userId");
+
+        BlogDTO blog = new BlogDTO();
+        blog.setUserId(userId);
+        blog.setTitle(title);
+        blog.setContent(content);
+        blog.setThumbnailUrl(thumbnailUrl); // 실제 업로드 경로 설정 필요
+
+        BlogDAO dao = new BlogDAO();
+        dao.insertBlog(blog);
+
+        response.sendRedirect("bloglist.jsp");
+    }
+}

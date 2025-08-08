@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>BookList</title>
+<style>
+body {
+	margin: 0;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #f7f7f7;
+}
+</style>
+</head>
+<body>
+	<header>
+		<jsp:include page="navi.jsp" />
+	</header>
+
+	<div class="container">
+		<jsp:include page="mainprofile.jsp" />
+
+		<div class="content">
+			<!-- 중앙 컨텐츠 영역 -->
+
+			<script>
+				// 부드럽게 스크롤해서 맨 위로 이동
+				document.querySelector('.top-btn').addEventListener('click',
+						function(e) {
+							e.preventDefault();
+							window.scrollTo({
+								top : 0,
+								behavior : 'smooth'
+							});
+						});
+			</script>
+
+		</div>
+
+	</div>
+
+
+
+	<footer>
+		<jsp:include page="footer.jsp" />
+	</footer>
+</body>
+</html>

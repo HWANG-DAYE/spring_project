@@ -1,0 +1,5 @@
+package com.springproject.archive.service;
+
+public class BlogService {
+
+}

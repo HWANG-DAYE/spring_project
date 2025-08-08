@@ -1,0 +1,25 @@
+package com.springproject.archive.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.springproject.archive.dto.BlogDTO;
+
+public class BlogDAO {
+    public List<BlogDTO> getAllBlogs() {
+        List<BlogDTO> blogs = new ArrayList<>();
+
+        // 임시 샘플 데이터
+        for (int i = 1; i <= 8; i++) {
+            BlogDTO blog = new BlogDTO();
+            blog.setId(i);
+            blog.setTitle("블로그 제목 " + i);
+            blog.setContent("블로그 내용 미리보기입니다. #" + i);
+            blog.setImage("sample" + i + ".png"); // 이미지 파일명
+
+            blogs.add(blog);
+        }
+
+        return blogs;
+    }
+}

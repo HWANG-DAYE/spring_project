@@ -1,0 +1,11 @@
+package com.springproject.archive.controller;
+
+
+@Controller
+public class ProfileController {
+
+    @GetMapping("/profile")
+    public String showProfilePage() {
+        return "profile"; // => /WEB-INF/views/profile.jsp ∑Œ ¿Ãµø
+    }
+}

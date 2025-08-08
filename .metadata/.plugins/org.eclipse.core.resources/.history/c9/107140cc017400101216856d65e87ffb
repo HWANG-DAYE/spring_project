@@ -1,0 +1,195 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Profile</title>
+<style>
+body {
+	margin: 0;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #f7f7f7;
+}
+  :root{
+    --bg: #faf7fb;
+    --card: #fff;
+    --accent: #e8c9f0;
+    --text: #222;
+    --muted: #666;
+    --border: #e6e0e8;
+  }
+
+  body{
+    margin: 0;
+    font-family: "Noto Sans KR", "Segoe UI", Tahoma, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 30px;
+  }
+
+  .wrap{
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 30px;
+  }
+
+  /* 왼쪽 카드 (사진 + 요약) */
+  .side {
+    width: 300px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+    box-sizing: border-box;
+  }
+  .avatar {
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .avatar img{
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 6px solid var(--accent);
+    background: #fff;
+  }
+  .side h2{
+    margin: 8px 0 4px;
+    font-size: 20px;
+  }
+  .side p.sub{
+    margin: 0 0 12px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .side .sns{
+    display:flex;
+    gap:8px;
+    margin: 12px 0;
+  }
+  .side .sns img{
+    width:28px; height:28px;
+  }
+
+  .side .summary{
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* 오른쪽 본문 */
+  .main {
+    flex: 1;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+  }
+
+  .card h3{
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #2d1a3b;
+  }
+
+  /* 타임라인 스타일(학력/경력) */
+  .timeline{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .item{
+    display:flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .item .year{
+    min-width: 110px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .item .detail{
+    flex: 1;
+  }
+  .item .detail strong{
+    display:block;
+    margin-bottom: 4px;
+    font-size: 15px;
+  }
+  .item .detail p{
+    margin:0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* 스킬/태그 */
+  .skills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .skill{
+    background: linear-gradient(180deg, #fff, #fbf8ff);
+    border:1px solid var(--border);
+    padding:6px 10px;
+    border-radius: 999px;
+    font-size:13px;
+    color: #3b2a4a;
+  }
+
+  /* 프로젝트 목록 */
+  .projects{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .project{
+    border-radius:10px;
+    padding:12px;
+    background: linear-gradient(180deg,#fff,#fffaf6);
+    border:1px solid var(--border);
+  }
+  .project h4{ margin:0 0 8px; font-size:15px;}
+  .project p{ margin:0; color:var(--muted); font-size:14px; line-height:1.4 }
+
+  /* 반응형: 좁아지면 한 칼럼으로 */
+  @media (max-width:900px){
+    .wrap{ flex-direction:column; padding: 20px; }
+    .side{ width:100% }
+    .projects{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+	<header>
+		<jsp:include page="navi.jsp" />
+	</header>
+
+	<div class="container">
+		<jsp:include page="mainprofile.jsp" />
+
+		<div class="content">
+			<!-- 중앙 컨텐츠 영역 -->
+		</div>
+
+	</div>
+
+	<footer>
+		<jsp:include page="footer.jsp" />
+	</footer>
+</body>
+</html>

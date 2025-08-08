@@ -1,0 +1,341 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Profile</title>
+<style>
+body {
+	margin: 0;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #f7f7f7;
+}
+
+:root { -
+	-bg: #faf7fb; -
+	-card: #fff; -
+	-accent: #e8c9f0; -
+	-text: #222; -
+	-muted: #666; -
+	-border: #e6e0e8;
+}
+
+.wrap {
+	max-width: 1100px;
+	margin: 0 auto;
+	display: flex;
+	gap: 30px;
+}
+
+.content {
+	flex: 1;
+	min-height: 400px;
+	padding: 20px
+}
+
+/* 오른쪽 본문 */
+.main {
+	flex: 1;
+}
+
+.card {
+	background: rgba(255, 255, 255, 0.4); /* 흰색 + 80% 불투명 */
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	padding: 18px 22px;
+	margin-bottom: 18px;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
+}
+
+.card h3 {
+	margin: 0 0 10px;
+	font-size: 18px;
+	color: #2d1a3b;
+}
+
+/* 타임라인 스타일(학력/경력) */
+.timeline {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.item {
+	display: flex;
+	gap: 14px;
+	align-items: flex-start;
+}
+
+.item .year {
+	min-width: 110px;
+	color: var(- -muted);
+	font-size: 14px;
+}
+
+.item .detail {
+	flex: 1;
+}
+
+.item .detail strong {
+	display: block;
+	margin-bottom: 4px;
+	font-size: 15px;
+}
+
+.item .detail p {
+	margin: 0;
+	color: var(- -muted);
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+/* 스킬/태그 */
+.skills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.skill {
+	background: linear-gradient(180deg, #fff, #fbf8ff);
+	border: 1px solid var(- -border);
+	padding: 6px 10px;
+	border-radius: 999px;
+	font-size: 13px;
+	color: #3b2a4a;
+}
+
+/* 프로젝트 목록 */
+.projects {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 12px;
+}
+
+.project {
+	border-radius: 10px;
+	padding: 12px;
+	background: linear-gradient(180deg, #fff, #fffaf6);
+	border: 1px solid var(- -border);
+}
+
+.project h4 {
+	margin: 0 0 8px;
+	font-size: 15px;
+}
+
+.project p {
+	margin: 0;
+	color: var(- -muted);
+	font-size: 14px;
+	line-height: 1.4
+}
+
+/* 반응형: 좁아지면 한 칼럼으로 */
+@media ( max-width :900px) {
+	.wrap {
+		flex-direction: column;
+		padding: 20px;
+	}
+	.side {
+		width: 100%
+	}
+	.projects {
+		grid-template-columns: 1fr;
+	}
+}
+
+.top-btn {
+	position: fixed;
+	bottom: 50px;  /* 화면 아래에서 20px */
+	right: 70px;   /* 화면 오른쪽에서 20px */
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+	z-index: 999;  /* 다른 요소보다 위 */
+}
+
+.top-btn img {
+	width: 100%;
+	height: 100%;
+	opacity: 0.8; /* 살짝 투명 */
+	transition: opacity 0.3s ease;
+}
+
+.top-btn img:hover {
+	opacity: 1; /* 마우스 올렸을 때 진하게 */
+}
+</style>
+</head>
+<body>
+	<header>
+		<jsp:include page="navi.jsp" />
+	</header>
+
+	<div class="container">
+		<jsp:include page="mainprofile.jsp" />
+
+		<div class="content">
+			<div class="wrap">
+
+				<!-- 오른쪽: 상세 섹션 -->
+				<main class="main">
+
+					<!-- 학력 -->
+					<section class="card">
+						<h3>학력사항</h3>
+						<div class="timeline">
+							<!-- 항목 추가/수정 가능 -->
+							<div class="item">
+								<div class="year">2014.03 – 2019.08</div>
+								<div class="detail">
+									<strong>대전대학교 / 방재학부</strong>
+									<p>전공: 지반방재공학 복수 전공: 국가안전방재학부</p>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- 경력 -->
+					<section class="card">
+						<h3>경력사항</h3>
+						<div class="timeline">
+							<div class="item">
+								<div class="year">2020.06 – 2021.01</div>
+								<div class="detail">
+									<strong>윤성이엔지</strong>
+									<p>안전진단부, 토목구조물 안전 진단</p>
+								</div>
+							</div>
+							<div class="item">
+								<div class="year">2022.05 – 2022.12</div>
+								<div class="detail">
+									<strong>한국비계기술원</strong>
+									<p>시공설계파트, 가설구조물 설계</p>
+								</div>
+							</div>
+
+							<!-- 더 추가 -->
+						</div>
+					</section>
+
+					<!-- 자격 -->
+					<section class="card">
+						<h3>자격사항</h3>
+						<div class="timeline">
+							<div class="item">
+								<div class="year">2017. 10</div>
+								<div class="detail">
+									<strong>운전면허</strong>
+									<p>2종보통운전면허</p>
+								</div>
+							</div>
+
+							<div class="item">
+								<div class="year">2019. 12</div>
+								<div class="detail">
+									<strong>ATC 2급</strong>
+									<p>Auto CAD 기술자격시험</p>
+								</div>
+							</div>
+
+							<div class="item">
+								<div class="year">2020. 01</div>
+								<div class="detail">
+									<strong>ITQ Master</strong>
+									<p>(국가공인)정보기술자격(ITQ)인증시험</p>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- 교육 -->
+					<section class="card">
+						<h3>교육 이수</h3>
+						<div class="timeline">
+							<div class="item">
+								<div class="year">2024.07 - 2025.01</div>
+								<div class="detail">
+									<strong>자바기반 스마트시티 공공기관 플랫폼 풀스택 개발자</strong>
+									<p>JAVA 기본 및 HTML/CSS/Spring Boot/React/GitHub 기초 실습</p>
+								</div>
+							</div>
+
+							<div class="item">
+								<div class="year">2025.03 - 2025.09</div>
+								<div class="detail">
+									<strong>자바기반 풀스텍 웹개발자</strong>
+									<p>HTML/CSS/JavaScript/Spring 기본 및 React 기초 실습</p>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- 스킬 -->
+					<section class="card">
+						<h3>스킬</h3>
+						<div class="skills">
+							<span class="skill">CAD</span> <span class="skill">오피스 활용</span> 
+							<span class="skill">HTML</span> <span class="skill">CSS</span> 
+							<span class="skill">JavaScript</span> <span class="skill">Spring</span>
+							<span class="skill">Spring Boot</span> <span class="skill">React</span>
+							<span class="skill">MyBatis</span> <span class="skill">Git</span>
+							<!-- 필요하면 더 추가 -->
+						</div>
+					</section>
+
+					<!-- 프로젝트 -->
+					<section class="card">
+						<h3>프로젝트</h3>
+						<div class="projects">
+							<div class="project">
+								<h4>Archive (개인 프로젝트)</h4>
+								<p>내 서재/리뷰/포트폴리오를 남기기 위한 개인 웹사이트. Spring + JSP + MySQL 사용.</p>
+							</div>
+
+							<div class="project">
+								<h4>Mini Blog (개인 프로젝트)</h4>
+								<p>간단한 CRUD 블로그, 이미지 업로드 및 페이징 구현(예시)</p>
+							</div>
+							
+							<div class="project">
+								<h4>Withus (팀 프로젝트)</h4>
+								<p>개인에게 맞는 책을 추천하고 독서 경험을 공유하는 커뮤니티</p>
+							</div>
+
+							<div class="project">
+								<h4>MarketBridge (팀 프로젝트)</h4>
+								<p>Spring Boot를 활용한 쇼핑몰, 관리 시스템</p>
+							</div>
+
+							<!-- 더 추가 가능 -->
+						</div>
+					</section>
+
+				</main>
+			</div>
+			
+	<!-- Top 버튼 -->
+	<a href="#" class="top-btn">
+		<img src="<c:url value='/resources/images/topbutton.png' />" alt="Top">
+	</a>
+
+	<script>
+	// 부드럽게 스크롤해서 맨 위로 이동
+	document.querySelector('.top-btn').addEventListener('click', function(e) {
+		e.preventDefault();
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	});
+	</script>
+	
+		</div>
+
+	</div>
+
+	<footer>
+		<jsp:include page="footer.jsp" />
+	</footer>
+</body>
+</html>

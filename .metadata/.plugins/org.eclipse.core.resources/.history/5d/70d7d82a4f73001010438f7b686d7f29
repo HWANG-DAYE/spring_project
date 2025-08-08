@@ -1,0 +1,13 @@
+package com.springproject.archive.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class BlogController {
+
+    @GetMapping("/blog")
+    public String showProfilePage() {
+        return "blog"; // => /WEB-INF/views/profile.jsp ∑Œ ¿Ãµø
+    }
+}

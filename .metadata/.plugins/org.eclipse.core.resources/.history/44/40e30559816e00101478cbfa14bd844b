@@ -1,0 +1,129 @@
+<%@ page contentType="text/html;charset=utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page import="java.net.URLDecoder" %>
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <style>
+        * { box-sizing:border-box; }
+
+        form {
+            width:400px;
+            height:600px;
+            display : flex;
+            flex-direction: column;
+            align-items:center;
+            position : absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%) ;
+            border: 1px solid rgb(89,117,196);
+            border-radius: 10px;
+        }
+
+        .input-field {
+            width: 300px;
+            height: 40px;
+            border : 1px solid rgb(89,117,196);
+            border-radius:5px;
+            padding: 0 10px;
+            margin-bottom: 10px;
+        }
+        label {
+            width:300px;
+            height:30px;
+            margin-top :4px;
+        }
+
+        #input-submit{
+            background-color: rgb(89,117,196);
+            color : white;
+            width:300px;
+            height:50px;
+            font-size: 17px;
+            border : none;
+            border-radius: 5px;
+            margin : 20px 0 30px 0;
+        }
+
+        .title {
+            font-size : 50px;
+            margin: 40px 0 30px 0;
+        }
+
+        .msg {
+            height: 30px;
+            text-align:center;
+            font-size:16px;
+            color:red;
+            margin-bottom: 20px;
+        }
+        .sns-chk {
+            margin-top : 5px; 
+        }
+    </style>
+    <title>Register</title>
+</head>
+<body>
+
+<form  method="post" id="user" action="<c:url value="/register/save"/>">
+    <div class="title">Register</div>
+    
+    <div id="msg" class="msg">${URLDecoder.decode(param.msg, "UTF-8")}</div> 
+    
+    <label for="id">아이디</label>
+    <input class="input-field" type="text" id="id" name="id" placeholder="8~12자리의 영대소문자와 숫자 조합" autofocus>
+    <button type="button" id="idcheck">아이디중복</button>
+    <label for="">비밀번호</label>
+    <input class="input-field" type="password" name="pwd" placeholder="8~12자리의 영대소문자와 숫자 조합">
+    <label for="">이름</label>
+    <input class="input-field" type="text" name="name" placeholder="홍길동">
+    <label for="">이메일</label>
+    <input class="input-field" type="email" name="email" placeholder="example@greenart.co.kr"> 
+    <label for="">생일</label>
+    <input class="input-field" type="date" name="birth" placeholder="2022/12/15" >
+    <label for="">취미</label>
+    <input class="input-field" type="text" name="hobby" placeholder="피아노#베이킹" >
+    <div class="sns-chk">
+        <label><input type="checkbox" name="sns" value="facebook"/>페이스북</label>
+        <label><input type="checkbox" name="sns" value="kakaotalk"/>카카오톡</label>
+        <label><input type="checkbox" name="sns" value="instagram"/>인스타그램</label>
+    </div>
+    <input id="input-submit" type="submit" value="회원가입"></input>
+</form> 
+   
+   
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+   <script src="https://kit.fontawesome.com/fd1f3e5f64.js" crossorigin="anonymous"></script>
+   <script>
+
+		
+		document.querySelector("#idcheck").onclick = function(){
+			let id = document.querySelector("#id");
+			if(id.value.trim().length==0){
+				alert('아이디를 입력해주세요.');
+				id.focus();
+				return;
+			}
+			
+			  $.ajax({
+		            type:'GET',       
+		            url: ``,  
+		            headers: {"content-type" : "application/json"}, 
+		            success : function(result){ 
+		           		
+		            },
+		            error:function(request, status, error){
+		        		console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		            }
+		        }); // $.ajax()
+		}
+   </script>
+   
+</body>
+</html>

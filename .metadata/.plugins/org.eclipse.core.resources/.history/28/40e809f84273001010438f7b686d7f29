@@ -1,0 +1,91 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+body {
+	margin: 0;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #f7f7f7;
+}
+
+header {
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 20px;
+	background-color: #ffffff;
+	border-bottom: 1px solid #ccc;
+}
+
+.logo-img {
+	height: 80px;
+	padding: 20px 30px;
+	object-fit: contain;
+}
+
+.container {
+	display: flex;
+	padding: 20px;
+}
+
+.nav-links {
+	display: flex;
+	gap: 30px;
+	justify-content: flex-start;
+}
+
+.nav-links a {
+	width: 150px;
+	height: 30px;
+	text-decoration: none;
+	text-align: center;
+	color: #333;
+	padding: 8px 12px;
+	border-radius: 15px;
+	border: 1px solid #ccc;
+	background-color: #f5f5f5;
+	transition: background-color 0.2s;
+	display: flex;
+	align-items: left;
+	justify-content: center;
+}
+
+.nav-links a:hover {
+	background-color: #e0e0e0;
+}
+
+.sign a{
+	text-decoration: none;
+	gap: 20px;
+	text-align: right;
+}
+</style>
+</head>
+<body>
+	<!-- 로고 클릭 시 메인으로 이동 -->
+	<div class="logo">
+		<a href="<c:url value='/main.jsp' />"> 
+		<img src="<c:url value='/resources/images/logo1.png' />" alt="Logo" class="logo-img">
+		</a>
+	</div>
+
+	<!-- 메뉴 링크들 -->
+	<nav class="nav-links">
+		<a href="<c:url value='/profile.jsp' />">Profile</a> 
+		<a href="<c:url value='/blog.jsp' />">Blog</a> 
+		<a href="<c:url value='/booklist.jsp' />">Book</a> 
+		<a href="<c:url value='/movielist.jsp' />">Movie</a>
+	</nav>
+
+	<!-- 로그인/회원가입 -->
+	<div class="sign">
+		<a href="<c:url value='/register.jsp' />">회원가입</a> 
+		<a href="<c:url value='/login.jsp' />">로그인</a>
+	</div>
+
+</body>
+</html>

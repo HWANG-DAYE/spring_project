@@ -1,0 +1,9 @@
+package com.springproject.archive.dao;
+
+import com.springproject.archive.dto.UserDTO;
+
+public interface UserDAO {
+    void insertUser(UserDTO user); // 세미콜론만! 중괄호 쓰지 말기
+    UserDTO findByUsername(String username);
+    int checkDuplicateUsername(String username);
+}

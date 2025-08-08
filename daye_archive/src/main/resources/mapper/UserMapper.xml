@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springproject.archive.dao.UserDAO">
+
+	<!-- 회원가입 -->
+	<insert id="insertUser" parameterType="com.springproject.archive.dto.UserDTO">
+		INSERT INTO users (
+			username, password, email
+		) VALUES (
+			#{username}, #{password}, #{email}
+		)
+	</insert>
+
+	<!-- 로그인용 -->
+	<select id="findByUsername" parameterType="String" resultType="com.springproject.archive.dto.UserDTO">
+		SELECT * FROM users WHERE username = #{username}
+	</select>
+
+	<!-- 아이디 중복 체크 -->
+	<select id="checkDuplicateUsername" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM users WHERE username = #{username}
+	</select>
+
+</mapper>

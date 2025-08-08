@@ -1,0 +1,38 @@
+package com.springproject.archive.util;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+import com.sun.tools.javac.util.Context;
+
+public class JDBConnect {
+    public Connection conn;
+
+    // 기본 생성자 - context.xml의 DBCP로 연결
+    public JDBConnect() {
+        try {
+            // JNDI를 이용한 커넥션 풀(DataSource) 연결
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context)initCtx.lookup("java:comp/env");
+            DataSource ds = (DataSource)envCtx.lookup("jdbc/mydb"); // context.xml에 설정한 이름
+            conn = ds.getConnection();
+            System.out.println("DBCP 연결 성공");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("DB 연결 실패");
+        }
+    }
+
+    // 연결 종료 메서드
+    public void close() {
+        try {
+            if (conn != null) conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
