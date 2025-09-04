@@ -5,7 +5,7 @@
 
 <mapper namespace="com.springproject.archive.mapper.BlogMapper">
 
-    <insert id="insertBlog" parameterType="com.springproject.archive.dto.BlogDTO">
+    <insert id="insertBlog" parameterType="com.springproject.archive.dto.Blog">
         INSERT INTO blog (user_id, title, content, thumbnail_url)
         VALUES (#{userId}, #{title}, #{content}, #{thumbnailUrl})
     </insert>

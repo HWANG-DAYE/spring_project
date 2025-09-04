@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.springproject.archive.dto.BlogDTO;
+import com.springproject.archive.dto.Blog;
 
 public class BlogDAO {
 
@@ -18,8 +18,8 @@ public class BlogDAO {
     }
 
     // 전체 블로그 리스트 조회
-    public List<BlogDTO> getAllBlogs() {
-        List<BlogDTO> blogList = new ArrayList<>();
+    public List<Blog> getAllBlogs() {
+        List<Blog> blogList = new ArrayList<>();
         String sql = "SELECT * FROM blog ORDER BY created_at DESC";
 
         try (Connection conn = getConnection();
@@ -27,7 +27,7 @@ public class BlogDAO {
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-                BlogDTO blog = new BlogDTO();
+                Blog blog = new Blog();
                 blog.setId(rs.getInt("id"));
                 blog.setUserId(rs.getInt("user_id"));
                 blog.setTitle(rs.getString("title"));
@@ -45,8 +45,8 @@ public class BlogDAO {
     }
 
     // 단일 블로그 조회
-    public BlogDTO getBlogById(int id) {
-        BlogDTO blog = null;
+    public Blog getBlogById(int id) {
+        Blog blog = null;
         String sql = "SELECT * FROM blog WHERE id = ?";
 
         try (Connection conn = getConnection();
@@ -55,7 +55,7 @@ public class BlogDAO {
             pstmt.setInt(1, id);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    blog = new BlogDTO();
+                    blog = new Blog();
                     blog.setId(rs.getInt("id"));
                     blog.setUserId(rs.getInt("user_id"));
                     blog.setTitle(rs.getString("title"));
@@ -73,7 +73,7 @@ public class BlogDAO {
     }
 
     // 블로그 글 추가
-    public int insertBlog(BlogDTO blog) {
+    public int insertBlog(Blog blog) {
         String sql = "INSERT INTO blog(user_id, title, content, thumbnail_url) VALUES (?, ?, ?, ?)";
         int result = 0;
 

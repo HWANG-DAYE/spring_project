@@ -58,6 +58,41 @@ body {
 .write-btn:hover {
 	background-color: #ffccdd;
 }
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+.card-content {
+    padding: 15px;
+}
+.card-content h3 {
+    margin: 0;
+    font-size: 18px;
+}
+.card-content p {
+    font-size: 14px;
+    color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 </style>
 </head>
 <body>
@@ -72,6 +107,19 @@ body {
 			<a href="${pageContext.request.contextPath}/book/form">
 				<button class="write-btn">✏️ 글쓰기</button>
 			</a>
+			
+			<div class="cards">
+    <c:forEach var="review" items="${reviews}">
+        <div class="card">
+            <img src="${review.bookThumbnail}" onerror="this.src='/images/noimage.png'"/>
+            <div class="card-content">
+                <h3>${review.title}</h3>
+                <p>${review.bookTitle} - ${review.bookAuthors}</p>
+                <p>${review.content}</p>
+            </div>
+        </div>
+    </c:forEach>
+</div>
 			
 			
 	<!-- Top 버튼 -->

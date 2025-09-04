@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.springproject.archive.dao.BlogDAO;
-import com.springproject.archive.dto.BlogDTO;
+import com.springproject.archive.dto.Blog;
 
 public class BlogDAOTest {
 
@@ -29,7 +29,7 @@ public class BlogDAOTest {
 
     @Test
     public void testInsertBlog() {
-        BlogDTO blog = new BlogDTO();
+        Blog blog = new Blog();
         blog.setUserId(1); // 테스트용 유저 ID
         blog.setTitle("JUnit 테스트 제목");
         blog.setContent("JUnit 테스트 내용입니다.");
@@ -41,14 +41,14 @@ public class BlogDAOTest {
 
     @Test
     public void testGetAllBlogs() {
-        List<BlogDTO> blogList = blogDAO.getAllBlogs();
+        List<Blog> blogList = blogDAO.getAllBlogs();
         assertNotNull(blogList);
         assertTrue(blogList.size() >= 0); // 비어 있어도 성공
     }
 
     @Test
     public void testGetBlogById() {
-        BlogDTO blog = blogDAO.getBlogById(1); // 실제 존재하는 ID 넣기
+        Blog blog = blogDAO.getBlogById(1); // 실제 존재하는 ID 넣기
         if (blog != null) {
             assertEquals(1, blog.getId());
             assertNotNull(blog.getTitle());

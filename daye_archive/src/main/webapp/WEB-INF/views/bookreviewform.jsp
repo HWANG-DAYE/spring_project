@@ -98,7 +98,66 @@ textarea {
 .btn-cancel:hover {
     background-color: #ccc;
 }
+.search-results {
+    margin-top: 15px;
+}
+.search-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.search-item:hover {
+    background: #f9f9f9;
+}
+.search-item img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
 </style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function searchBook() {
+    let keyword = document.getElementById("searchKeyword").value;
+    fetch("/book/search?keyword=" + encodeURIComponent(keyword))
+        .then(res => res.json())
+        .then(data => {
+            let resultsDiv = document.getElementById("searchResults");
+            resultsDiv.innerHTML = "";
+
+            data.forEach(book => {
+                let div = document.createElement("div");
+                div.classList.add("book-item");
+
+                // 🔹 백틱 대신 문자열 결합
+                let imgTag = '<img src="' + book.thumbnail + '" width="50">';
+                let titleSpan = '<span>' + book.title + ' (' + book.authors + ')</span>';
+                div.innerHTML = imgTag + titleSpan;
+
+                div.onclick = function() {
+                    let selectedDiv = document.getElementById("selectedBook");
+                    selectedDiv.innerHTML = '<img src="' + book.thumbnail + '" width="80"><br>' +
+                                            book.title + ' - ' + book.authors;
+
+                    document.getElementById("bookTitle").value = book.title;
+                    document.getElementById("bookAuthors").value = book.authors;
+                    document.getElementById("bookThumbnail").value = book.thumbnail;
+                };
+
+                resultsDiv.appendChild(div);
+            });
+        })
+        .catch(err => console.error(err));
+}
+</script>
+
+
 </head>
 <body>
 
@@ -120,15 +179,24 @@ textarea {
                     <input type="text" id="title" name="title" required>
                 </div>
 
+                                <!-- 책 검색 영역 -->
                 <div class="form-group">
-                    <label for="book">책 선택</label>
-                    <select id="book" name="bookId" required>
-                        <option value="">-- 책을 선택하세요 --</option>
-                        <option value="1">달과 6펜스</option>
-                        <option value="2">데미안</option>
-                        <option value="3">위대한 개츠비</option>
-                    </select>
+                    <label for="book">책 검색</label>
+                    <input type="text" id="searchKeyword" placeholder="책 제목 검색">
+                    <button type="button" onclick="searchBook()">검색</button>
+                    <div id="searchResults" class="search-results"></div>
                 </div>
+
+                <!-- 선택된 책 정보 표시 -->
+                <div class="form-group">
+                    <label>선택된 책</label>
+                    <div id="selectedBook">선택된 책이 없습니다.</div>
+                </div>
+
+                <!-- hidden input (DB 저장용) -->
+                <input type="hidden" id="bookTitle" name="bookTitle">
+                <input type="hidden" id="bookAuthors" name="bookAuthors">
+                <input type="hidden" id="bookThumbnail" name="bookThumbnail">
 
                 <div class="form-group">
                     <label for="content">내용</label>

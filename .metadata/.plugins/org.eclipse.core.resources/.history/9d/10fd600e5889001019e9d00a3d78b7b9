@@ -1,0 +1,54 @@
+package com.springproject.archive.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import dao.BookReviewDAO;
+import model.BookReview;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/book")
+public class BookController {
+
+    private BookReviewDAO reviewDAO = new BookReviewDAO(); // 바로 DAO 연결
+
+    // 리뷰 작성 페이지
+    @GetMapping("/form")
+    public String showForm() {
+        return "bookreviewform";
+    }
+
+    // 리뷰 저장
+    @PostMapping("/insert")
+    public String insertReview(@RequestParam("title") String title,
+                               @RequestParam("content") String content,
+                               @RequestParam("hashtags") String hashtags,
+                               @RequestParam("bookTitle") String bookTitle,
+                               @RequestParam("bookAuthors") String bookAuthors,
+                               @RequestParam("bookThumbnail") String bookThumbnail) {
+
+        BookReview review = new BookReview();
+        review.setUserId(1); // 로그인 기능 없으니까 임시 user_id = 1
+        review.setTitle(title);
+        review.setContent(content);
+        review.setHashtags(hashtags);
+        review.setBookTitle(bookTitle);
+        review.setBookAuthors(bookAuthors);
+        review.setBookThumbnail(bookThumbnail);
+
+        reviewDAO.insert(review); // DB 저장
+
+        return "redirect:/book/list";
+    }
+
+    // 리뷰 목록 출력
+    @GetMapping("/list")
+    public String listReviews(Model model) {
+        List<BookReview> reviews = reviewDAO.getAll();
+        model.addAttribute("reviews", reviews);
+        return "booklist"; // booklist.jsp로 이동
+    }
+}

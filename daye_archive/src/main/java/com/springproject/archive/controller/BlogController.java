@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.springproject.archive.dto.BlogDTO;
+import com.springproject.archive.dto.Blog;
 import com.springproject.archive.service.BlogService;
 
 @Controller
@@ -36,7 +36,7 @@ public class BlogController {
                               @RequestParam("content") String content,
                               @RequestParam("image") MultipartFile file) throws IOException {
 
-        BlogDTO blog = new BlogDTO();
+        Blog blog = new Blog();
         blog.setUserId(1); // 🔹 로그인 기능 없으니까 임시로 1번 유저
         blog.setTitle(title);
         blog.setContent(content);
