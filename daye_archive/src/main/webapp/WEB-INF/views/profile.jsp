@@ -21,6 +21,18 @@ body {
 	-muted: #666; -
 	-border: #e6e0e8;
 }
+.aboutme-section {
+    text-align: center;
+    margin: 40px 0 50px 0;
+}
+
+.aboutme-section h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
 
 .wrap {
 	max-width: 1100px;
@@ -42,7 +54,7 @@ body {
 
 .card {
 	background: rgba(255, 255, 255, 0.4); /* 흰색 + 80% 불투명 */
-	border: 1px solid var(--border);
+	border: 1px solid var(- -border);
 	border-radius: 12px;
 	padding: 18px 22px;
 	margin-bottom: 18px;
@@ -149,12 +161,12 @@ body {
 
 .top-btn {
 	position: fixed;
-	bottom: 50px;  /* 화면 아래에서 20px */
-	right: 70px;   /* 화면 오른쪽에서 20px */
+	bottom: 50px; /* 화면 아래에서 20px */
+	right: 70px; /* 화면 오른쪽에서 20px */
 	width: 50px;
 	height: 50px;
 	cursor: pointer;
-	z-index: 999;  /* 다른 요소보다 위 */
+	z-index: 999; /* 다른 요소보다 위 */
 }
 
 .top-btn img {
@@ -182,7 +194,9 @@ body {
 
 				<!-- 오른쪽: 상세 섹션 -->
 				<main class="main">
-
+					<div class="aboutme-section">
+						<h2>About Me</h2>
+					</div>
 					<!-- 학력 -->
 					<section class="card">
 						<h3>학력사항</h3>
@@ -277,9 +291,9 @@ body {
 					<section class="card">
 						<h3>스킬</h3>
 						<div class="skills">
-							<span class="skill">CAD</span> <span class="skill">오피스 활용</span> 
-							<span class="skill">HTML</span> <span class="skill">CSS</span> 
-							<span class="skill">JavaScript</span> <span class="skill">Spring</span>
+							<span class="skill">CAD</span> <span class="skill">오피스 활용</span>
+							<span class="skill">HTML</span> <span class="skill">CSS</span> <span
+								class="skill">JavaScript</span> <span class="skill">Spring</span>
 							<span class="skill">Spring Boot</span> <span class="skill">React</span>
 							<span class="skill">MyBatis</span> <span class="skill">Git</span>
 							<!-- 필요하면 더 추가 -->
@@ -299,7 +313,7 @@ body {
 								<h4>Mini Blog (개인 프로젝트)</h4>
 								<p>간단한 CRUD 블로그, 이미지 업로드 및 페이징 구현(예시)</p>
 							</div>
-							
+
 							<div class="project">
 								<h4>Withus (팀 프로젝트)</h4>
 								<p>개인에게 맞는 책을 추천하고 독서 경험을 공유하는 커뮤니티</p>
@@ -316,20 +330,24 @@ body {
 
 				</main>
 			</div>
-			
-	<!-- Top 버튼 -->
-	<a href="#" class="top-btn">
-		<img src="<c:url value='/resources/images/topbutton.png' />" alt="Top">
-	</a>
 
-	<script>
-	// 부드럽게 스크롤해서 맨 위로 이동
-	document.querySelector('.top-btn').addEventListener('click', function(e) {
-		e.preventDefault();
-		window.scrollTo({ top: 0, behavior: 'smooth' });
-	});
-	</script>
-	
+			<!-- Top 버튼 -->
+			<a href="#" class="top-btn"> <img
+				src="<c:url value='/resources/images/topbutton.png' />" alt="Top">
+			</a>
+
+			<script>
+				// 부드럽게 스크롤해서 맨 위로 이동
+				document.querySelector('.top-btn').addEventListener('click',
+						function(e) {
+							e.preventDefault();
+							window.scrollTo({
+								top : 0,
+								behavior : 'smooth'
+							});
+						});
+			</script>
+
 		</div>
 
 	</div>

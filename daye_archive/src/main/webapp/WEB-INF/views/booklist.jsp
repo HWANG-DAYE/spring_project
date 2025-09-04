@@ -13,6 +13,14 @@ body {
 	background-color: #f7f7f7;
 }
 
+.container {
+	display: flex;
+	padding: 20px;
+}
+
+.content {
+	flex: 1;
+}
 
 .top-btn {
 	position: fixed;
@@ -34,6 +42,22 @@ body {
 .top-btn img:hover {
 	opacity: 1; /* 마우스 올렸을 때 진하게 */
 }
+
+.write-btn {
+	float: right;
+	margin-bottom: 20px;
+	background-color: #ffddee;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 15px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.write-btn:hover {
+	background-color: #ffccdd;
+}
 </style>
 </head>
 <body>
@@ -45,7 +69,9 @@ body {
 		<jsp:include page="mainprofile.jsp" />
 
 		<div class="content">
-			<!-- 중앙 컨텐츠 영역 -->
+			<a href="${pageContext.request.contextPath}/book/form">
+				<button class="write-btn">✏️ 글쓰기</button>
+			</a>
 			
 			
 	<!-- Top 버튼 -->

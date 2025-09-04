@@ -1,5 +1,0 @@
-package com.springproject.archive.mapper;
-
-public interface BlogMapper {
-
-}

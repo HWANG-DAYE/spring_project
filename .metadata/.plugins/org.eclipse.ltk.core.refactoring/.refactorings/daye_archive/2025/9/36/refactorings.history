@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;bookreviewform.jsp&apos; to &apos;bookreviewform.jsp&apos;&#x0D;&#x0A;- Original project: &apos;daye_archive&apos;&#x0D;&#x0A;- Destination element: &apos;bookreviewform.jsp&apos;&#x0D;&#x0A;- Original element: &apos;bookreviewform.jsp&apos;" description="Copy file" element1="src/main/webapp/WEB-INF/views/bookreviewform.jsp" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1756881800853" target="/daye_archive/src/main/webapp/WEB-INF/views/bookreviewform.jsp" units="0" version="1.0"/>
+</session>

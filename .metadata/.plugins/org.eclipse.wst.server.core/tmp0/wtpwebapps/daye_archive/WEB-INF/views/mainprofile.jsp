@@ -40,6 +40,7 @@ body {
 	font-weight: bold;
 	padding: 30px;
 }
+
 .profile .image-box img {
 	width: 200px;
 	height: 250px;
@@ -50,24 +51,26 @@ body {
 	margin: 15px 0;
 	align-items: left;
 }
-
+.sns a {
+    text-decoration: none; /* 밑줄 제거 */
+}
 .profile .sns img {
 	width: 30px;
 	margin-right: 5px;
 }
 
 .profile ul {
-	text-align: left;
 	list-style: none;
 	margin-top: 20px;
+	padding: 0 30px; /* 좌우 여백 동일하게 (10px은 적당히 조절 가능) */
+	text-align: left; /* 왼쪽 정렬 유지 */
+	box-sizing: border-box;
 }
 
 .profile li {
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 30px;
 }
-
-
 </style>
 </head>
 <body>
@@ -75,21 +78,27 @@ body {
 	<div class="container">
 		<div class="profile">
 			<div class="image-box">
-				<img src="<c:url value='/resources/images/profile.png' />" alt="Profile">
+				<img src="<c:url value='/resources/images/profile.png' />"
+					alt="Profile">
 			</div>
 			<div class="sns">
+				<a href="https://github.com/HWANG-DAYE" target="_blank"> 
 				<img src="<c:url value='/resources/images/git.png' />" alt="GitHub">
-				<img src="<c:url value='/resources/images/insta.png' />"
-					alt="Instagram"> <img
-					src="<c:url value='/resources/images/blog.png' />" alt="Blog">
+				</a> 
+				<a href="https://www.instagram.com/ttiny_dy/" target="_blank">
+				<img src="<c:url value='/resources/images/insta.png' />" alt="Instagram">
+				</a> 
+				<a href="https://blog.naver.com/daye_blog" target="_blank"> 
+				<img src="<c:url value='/resources/images/blog.png' />" alt="Blog">
+				</a> 
 			</div>
 			<ul>
-				<li>📌 이름 : 황다예</li>
-				<li>📌 MBTI : ENFJ</li>
-				<li>📌 취미 : 독서, 영화, 사진</li>
-				<li>📌 개발 동기 : 나를 소개하고 기록을 남기기 위한 웹페이지를 만들고 싶었습니다.</li>
-				<li>📌 슬로건 : 나를 담은 작은 공간, 나만의 기록</li>
-				<li>📌 협업 스타일 : 팀원들과의 소통을 중요하게 생각하며, 문제 상황에서도 유연하고 긍정적인 태도로
+				<li>🖤 황다예</li>
+				<li>🖤 MBTI : ENFJ</li>
+				<li>🖤 취미 : 독서, 영화, 사진</li>
+				<li>🖤 개발 동기 : 나를 소개하고 기록을 남기기 위한 웹페이지를 만들고 싶었습니다.</li>
+				<li>🖤 슬로건 : 나를 담은 작은 공간, 나만의 기록</li>
+				<li>🖤 협업 스타일 : 팀원들과의 소통을 중요하게 생각하며, 문제 상황에서도 유연하고 긍정적인 태도로
 					협업합니다.</li>
 			</ul>
 		</div>

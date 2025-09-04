@@ -79,14 +79,12 @@ header {
 	<nav class="nav-links">
 		<a href="<c:url value='/profile' />">Profile</a> 
 		<a href="<c:url value='/blog/list' />">Blog</a>
-		<a href="<c:url value='/booklist' />">Book</a> 
-		<a href="<c:url value='/movielist' />">Movie</a>
+		<a href="<c:url value='/book/list' />">Book</a> 
+		<a href="<c:url value='/movie/list' />">Movie</a>
 	</nav>
 
 	<!-- 로그인/회원가입 -->
 	<div class="sign">
-		<a href="<c:url value='/register.jsp' />">회원가입</a> 
-		<a href="<c:url value='/login.jsp' />">로그인</a>
 	</div>
 
 </body>
