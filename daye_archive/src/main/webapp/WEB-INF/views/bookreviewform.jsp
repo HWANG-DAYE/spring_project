@@ -125,7 +125,7 @@ textarea {
 <script>
 function searchBook() {
     let keyword = document.getElementById("searchKeyword").value;
-    fetch("/book/search?keyword=" + encodeURIComponent(keyword))
+    fetch("/archive/book/search?keyword=" + encodeURIComponent(keyword))
         .then(res => res.json())
         .then(data => {
             let resultsDiv = document.getElementById("searchResults");

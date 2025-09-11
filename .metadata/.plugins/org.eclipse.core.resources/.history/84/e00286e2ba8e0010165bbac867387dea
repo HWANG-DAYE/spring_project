@@ -1,0 +1,105 @@
+package com.springproject.archive.controller;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.springproject.archive.dao.BookReviewDAO;
+import com.springproject.archive.dto.BookReview;
+
+
+@Controller
+@RequestMapping("/book")
+public class BookController {
+	
+	private BookReviewDAO reviewDAO = new BookReviewDAO();
+
+    // 리뷰 목록 출력
+    @GetMapping("/list")
+    public String listReviews(Model model) {
+        List<BookReview> reviews = reviewDAO.getAll();
+        model.addAttribute("reviews", reviews);
+        return "booklist"; // booklist.jsp로 이동
+    }
+    
+    // 리뷰 작성 페이지
+    @GetMapping("/form")
+    public String showForm() {
+        return "bookreviewform";
+    }
+
+    // 리뷰 저장
+    @PostMapping("/insert")
+    public String insertReview(@RequestParam("title") String title,
+                               @RequestParam("content") String content,
+                               @RequestParam("hashtags") String hashtags,
+                               @RequestParam("bookTitle") String bookTitle,
+                               @RequestParam("bookAuthors") String bookAuthors,
+                               @RequestParam("bookThumbnail") String bookThumbnail) {
+
+        BookReview review = new BookReview();
+        review.setUserId(1); // 로그인 기능 없으니까 임시 user_id = 1
+        review.setTitle(title);
+        review.setContent(content);
+        review.setHashtags(hashtags);
+        review.setBookTitle(bookTitle);
+        review.setBookAuthors(bookAuthors);
+        review.setBookThumbnail(bookThumbnail);
+
+        reviewDAO.insert(review); // DB 저장
+
+        return "redirect:/book/list";
+    }
+    
+    @GetMapping("/search")
+    @ResponseBody
+    public List<Map<String, Object>> searchBook(@RequestParam String keyword) {
+        List<Map<String, Object>> results = new ArrayList<>();
+        try {
+            String apiUrl = "https://dapi.kakao.com/v3/search/book?query=" + URLEncoder.encode(keyword, "UTF-8");
+            URL url = new URL(apiUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Authorization", "KakaoAK 9a7a4f08bac8f315e85914ca4300f933"); // 🔹 발급받은 REST API 키 넣기
+            System.out.println(apiUrl);
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) sb.append(line);
+
+            JSONObject json = new JSONObject(sb.toString());
+            JSONArray docs = json.getJSONArray("documents");
+            
+//            for (int i = 0; i < docs.length(); i++) {
+//                JSONObject book = docs.getJSONObject(i);
+//                Map<String, Object> map = new HashMap<>();
+//                map.put("title", book.getString("title"));
+//                map.put("authors", book.getJSONArray("authors").join(", ")); // 저자
+//                map.put("thumbnail", book.optString("thumbnail", "")); // 썸네일
+//                results.add(map);
+//            }
+//            System.out.println(results);
+            return docs.toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+}

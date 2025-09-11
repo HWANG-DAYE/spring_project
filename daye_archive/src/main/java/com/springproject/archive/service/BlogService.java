@@ -1,5 +1,7 @@
 package com.springproject.archive.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,10 @@ public class BlogService {
 
     public void insertBlog(Blog blog) {
         blogMapper.insertBlog(blog);
+    }
+    
+    // 블로그 글 전체 조회
+    public List<Blog> selectBlogList() {
+        return blogMapper.selectBlogList();
     }
 }

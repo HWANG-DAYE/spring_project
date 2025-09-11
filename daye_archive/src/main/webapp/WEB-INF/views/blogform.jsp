@@ -115,7 +115,7 @@ textarea {
 
                 <!-- ✅ action을 blog/insert 로 수정 -->
                 <form action="<c:url value='/blog/insert' />"
-                      method="post" enctype="multipart/form-data">
+                      method="post" >
 
                     <div class="form-group">
                         <label for="image">썸네일 이미지</label>

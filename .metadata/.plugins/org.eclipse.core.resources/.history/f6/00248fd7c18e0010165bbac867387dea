@@ -1,0 +1,149 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Blog</title>
+<style>
+body {
+	margin: 0;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #f7f7f7;
+}
+
+.container {
+	display: flex;
+	padding: 20px;
+}
+
+.content {
+	flex: 1;
+}
+
+.card-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
+.card {
+	width: calc(25% - 20px);
+	background-color: white;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	padding: 10px;
+}
+
+.card img {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+	border-radius: 10px;
+}
+
+.card h3 {
+	margin: 10px 0 5px;
+	font-size: 18px;
+}
+
+.card p {
+	font-size: 14px;
+	color: #555;
+}
+
+.write-btn {
+	float: right;
+	margin-bottom: 20px;
+	background-color: #ffddee;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 15px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.write-btn:hover {
+	background-color: #ffccdd;
+}
+
+.top-btn {
+	position: fixed;
+	bottom: 50px; /* 화면 아래에서 20px */
+	right: 70px; /* 화면 오른쪽에서 20px */
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+	z-index: 999; /* 다른 요소보다 위 */
+}
+
+.top-btn img {
+	width: 100%;
+	height: 100%;
+	opacity: 0.8; /* 살짝 투명 */
+	transition: opacity 0.3s ease;
+}
+
+.top-btn img:hover {
+	opacity: 1; /* 마우스 올렸을 때 진하게 */
+}
+</style>
+</head>
+<body>
+
+	<header>
+		<jsp:include page="navi.jsp" />
+	</header>
+
+	<div class="container">
+		<jsp:include page="mainprofile.jsp" />
+
+		<div class="content">
+			<a href="${pageContext.request.contextPath}/blog/form">
+				<button class="write-btn">✏️ 글쓰기</button>
+			</a>
+
+			<!-- 카드 리스트 -->
+			<div class="card-container">
+				<c:forEach var="blog" items="${blogList}">
+					<div class="card">
+						<img
+							src="${pageContext.request.contextPath}/resources/images/${blog.image}"
+							alt="썸네일">
+						<h3>${blog.title}</h3>
+						<p>${blog.content}</p>
+					</div>
+				</c:forEach>
+			</div>
+			<script>
+				// 부드럽게 스크롤해서 맨 위로 이동
+				document.querySelector('.top-btn').addEventListener('click',
+						function(e) {
+							e.preventDefault();
+							window.scrollTo({
+								top : 0,
+								behavior : 'smooth'
+							});
+						});
+			</script>
+		</div>
+	</div>
+
+	<!-- Top 버튼 -->
+	<a href="#" class="top-btn"> <img
+		src="<c:url value='/resources/images/topbutton.png' />" alt="Top">
+	</a>
+
+
+
+
+	<footer>
+		<jsp:include page="footer.jsp" />
+	</footer>
+
+</body>
+</html>

@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,18 +68,23 @@ public class BookController {
         return "redirect:/book/list";
     }
     
-    @GetMapping("/search")
+    @GetMapping(value = "/search", produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public List<Map<String, Object>> searchBook(@RequestParam String keyword) {
+    public String searchBook(@RequestParam String keyword) {
         List<Map<String, Object>> results = new ArrayList<>();
         try {
-            String apiUrl = "https://dapi.kakao.com/v3/search/book?query=" + URLEncoder.encode(keyword, "UTF-8");
+            String apiUrl = "https://dapi.kakao.com/v3/search/book?query=" 
+                + URLEncoder.encode(keyword, StandardCharsets.UTF_8.toString());
+
             URL url = new URL(apiUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Authorization", "KakaoAK 9a7a4f08bac8f315e85914ca4300f933"); // 🔹 발급받은 REST API 키 넣기
+            conn.setRequestProperty("Authorization", "KakaoAK 9a7a4f08bac8f315e85914ca4300f933"); // REST API 키
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            BufferedReader br = new BufferedReader(
+                new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8)
+            );
+
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) sb.append(line);
@@ -86,18 +92,12 @@ public class BookController {
             JSONObject json = new JSONObject(sb.toString());
             JSONArray docs = json.getJSONArray("documents");
 
-            for (int i = 0; i < docs.length(); i++) {
-                JSONObject book = docs.getJSONObject(i);
-                Map<String, Object> map = new HashMap<>();
-                map.put("title", book.getString("title"));
-                map.put("authors", book.getJSONArray("authors").join(", ")); // 저자
-                map.put("thumbnail", book.optString("thumbnail", "")); // 썸네일
-                results.add(map);
-            }
+            return docs.toString();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return results;
+        return null;
     }
+
 }

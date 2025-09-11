@@ -111,13 +111,19 @@ body {
 			<div class="card-container">
 				<c:forEach var="blog" items="${blogList}">
 					<div class="card">
-						<img
-							src="${pageContext.request.contextPath}/resources/images/${blog.image}"
-							alt="썸네일">
+						<c:choose>
+							<c:when test="${not empty blog.thumbnailUrl}">
+								<img src="${blog.thumbnailUrl}" alt="썸네일">
+							</c:when>
+							<c:otherwise>
+								<img src="<c:url value='/resources/images/default.png' />" alt="기본 이미지">
+							</c:otherwise>
+						</c:choose>
 						<h3>${blog.title}</h3>
 						<p>${blog.content}</p>
 					</div>
 				</c:forEach>
+
 			</div>
 			<script>
 				// 부드럽게 스크롤해서 맨 위로 이동
